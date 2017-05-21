@@ -1,0 +1,12 @@
+#marked {
+  
+}
+
+#marked h1 {
+}
+
+#marked pre {
+  padding: .5em;
+  background-color: #f5f5f5;
+  overflow: auto;;
+}
