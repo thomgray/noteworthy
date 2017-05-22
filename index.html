@@ -2,13 +2,29 @@
 <html>
   <head>
     <link rel="stylesheet" href="styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="styles/slider.css">
+    <link rel="stylesheet" href="styles/tree.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Code+Pro" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>CodeBook</title>
   </head>
   <body>
-    <button type="button" name="button" id="toggle-edit-btn">Edit</button>
-    <div id="marked"></div>
+    <div class="tree-view" id="tree-view">
+      
+    </div>
+    <div class="main-wrapper">
+      <input type="text" name="search" value="" id="command-line" class="command-line">
+      <label class="switch">
+        <input type="checkbox" id="edit-checkbox">
+        <div class="slider">
+          <div class="slider-edit slider-comp">EDIT</div>
+          <div class="slider-bar slider-comp"></div>
+          <div class="slider-md slider-comp">MD</div>
+        </div>
+      </label>
+
+      <div id="marked"></div>
+    </div>
   </body>
 
   <script>
