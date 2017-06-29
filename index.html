@@ -4,31 +4,30 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/slider.css">
     <link rel="stylesheet" href="styles/tree.css">
+    <link rel="stylesheet" href="styles/pane.css">
+    <link rel="stylesheet" href="styles/md.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Code+Pro" rel="stylesheet">
     <meta charset="UTF-8">
     <title>CodeBook</title>
   </head>
   <body>
-    <div class="tree-view" id="tree-view">
-      
-    </div>
-    <div class="main-wrapper">
-      <input type="text" name="search" value="" id="command-line" class="command-line">
-      <label class="switch">
-        <input type="checkbox" id="edit-checkbox">
-        <div class="slider">
-          <div class="slider-edit slider-comp">EDIT</div>
-          <div class="slider-bar slider-comp"></div>
-          <div class="slider-md slider-comp">MD</div>
+    <div class="panes-container">
+      <div class="left-pane" id="left-pane">
+          <div class="tree-view" id="tree-view">
+          </div>
+      </div>
+      <div class="right-pane" id="right-pane">
+        <div class="main-wrapper">
+          <input type="text" name="search" value="" id="command-line" class="command-line">
+          <div id="marked"></div>
         </div>
-      </label>
-
-      <div id="marked"></div>
+      </div>
     </div>
+    
   </body>
 
   <script>
     // You can also require other files to run in this process
-    const renderer = require('./renderer.js')
+    const renderer = require('./src/app.js')
   </script>
 </html>

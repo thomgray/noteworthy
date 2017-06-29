@@ -1,0 +1,17 @@
+[
+  {
+    "name": "C",
+    "id": "abc123",
+    "tags": ["c"],
+    "file": "c.md",
+    "children": [
+      {
+        "name": "Compiling",
+        "id": "abc124",
+        "file": "abc124.md",
+        "tags": ["/compil(e|ing)/"],
+        "children": []
+      }
+    ]
+  }
+]

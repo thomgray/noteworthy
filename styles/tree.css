@@ -3,6 +3,32 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 10%;
+  width: 100%;
   height: 100%;
+  overflow: scroll;
+}
+
+.tree-view ul {
+  list-style-type: none;
+  -webkit-padding-start: 10px
+}
+
+.tree-list {
+  
+}
+
+.tree-list-item {
+  
+}
+.tree-list__element {
+  position: relative;
+  display: inline-block;
+  padding: .2em .5em;
+  cursor: default;
+  width: 100%;
+  height: 100%
+}
+
+.tree-list__element:hover{
+  background-color: grey;
 }
