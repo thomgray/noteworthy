@@ -19,7 +19,7 @@ module.exports = {
         })
       }
     })
-
+    
     const code = $(node).find('pre:has(code)').toArray()
     code.forEach((block) => {
       block.classList.add('code-container')
@@ -28,9 +28,38 @@ module.exports = {
       copyIcon.classList.add('code__copyIcon')
       block.appendChild(copyIcon)
     })
+    
+    mapCheckBoxes(node)
 
     return node;
   }
+}
+
+function mapCheckBoxes(nodes) {
+  console.log(nodes);
+  listItems = nodes.querySelectorAll('li')
+  listItems.forEach(function(li){
+    match = li.innerHTML.match(/^\[( |x)\] (.*)$/)
+    if (match) {
+      checked = match[1] !== ' '
+      content = match[2]
+      checkBoxDiv = document.createElement('div')
+      checkBox = document.createElement('input')
+      checkBox.setAttribute('type', 'checkbox')
+      if (checked) {
+        checkBox.setAttribute('checked', true)
+      }
+      label = document.createElement('label')
+      label.innerHTML = content
+      checkBoxDiv.appendChild(checkBox)
+      checkBoxDiv.appendChild(label)
+      li.innerHTML = ""
+      li.appendChild(checkBoxDiv)
+    } else {
+      console.log(li.innerHTML);
+    }
+
+  })
 }
 
 function copyCode(ev) {

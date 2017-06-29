@@ -7,6 +7,7 @@
   position: absolute;
   overflow: scroll;
   box-sizing: border-box;
+  background-color: rgb(250,250,250);
 }
 
 #marked .marked-container {
@@ -15,26 +16,6 @@
   right: 1em;
   left: .1em;
   padding-left: .5em;
-}
-
-#marked .raw-md {
-  position: absolute;
-  border: none;
-  font-family: 'Source Code Pro', monospace;
-  width: 100%;
-  height: 100%;
-  padding: 1em 1em;
-  box-sizing: border-box;
-  background-color: #f8f8f8;
-  resize: none;
-}
-
-#marked .raw-md-wrapper {
-  height: 100%;
-  width: 100%;
-  background-color: pink;
-  display: flex;
-  flex-direction: column; 
 }
 
 #marked pre {

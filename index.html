@@ -2,10 +2,10 @@
 <html>
   <head>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/slider.css">
     <link rel="stylesheet" href="styles/tree.css">
     <link rel="stylesheet" href="styles/pane.css">
     <link rel="stylesheet" href="styles/md.css">
+    <link rel="stylesheet" href="styles/icons.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Code+Pro" rel="stylesheet">
     <meta charset="UTF-8">
     <title>CodeBook</title>
@@ -19,6 +19,13 @@
       <div class="right-pane" id="right-pane">
         <div class="main-wrapper">
           <input type="text" name="search" value="" id="command-line" class="command-line">
+          <div class="index-button">
+            <svg width="20" height="20" viewBox="0 0 40 40">
+              <line x1="0" x2="40" y1="35" y2="35" style="stroke:grey;stroke-width:2"/>
+              <line x1="0" x2="40" y1="25" y2="25" style="stroke:rgb(255,0,0);stroke-width:2"/>
+              <line x1="0" x2="40" y1="15" y2="15" style="stroke:rgb(255,0,0);stroke-width:2"/>
+            </svg>
+          </div>
           <div id="marked"></div>
         </div>
       </div>
