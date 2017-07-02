@@ -1,4 +1,5 @@
 const fs = require('fs-plus');
+const md = require('./markdown');
 
 module.exports = {
   getMap() {
@@ -31,7 +32,6 @@ module.exports = {
           return  {file: file, dir: dir, extension: extn} 
         });
     }));
-
     return notePaths;
   },
   loadNote(path) {
@@ -40,5 +40,12 @@ module.exports = {
     } else if ('dir' in path && 'file' in path) {
       return fs.readFileSync(`${path.dir}/${path.file}.${path.extension}`, 'utf8');
     }
+  },
+  getTitleForNote(path) {
+    str = this.loadNote(path);
+    nodes = md.markdown(str);
+    h1s = nodes.querySelectorAll('h1');
+    console.log(h1s);
+    return h1s[0].innerHTML
   }
 }

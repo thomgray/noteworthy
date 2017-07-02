@@ -93,13 +93,14 @@ commandLine.oninput = function(){
     }
   }))
   if (results && results.length) {
-    commandLinePopUp.classList.add('shown');
+    commandLinePopUp.classList.add('show');
     util.removeAllChildren(commandLinePopUp);
     ul = getSearchResultsAsUl(results);
     ul.firstChild.classList.add('selected')
     commandLinePopUp.appendChild(ul);
   } else {
-    commandLinePopUp.classList.remove('shown')
+    commandLinePopUp.classList.remove('show')
+    util.removeAllChildren(commandLinePopUp)
   }
 }
 

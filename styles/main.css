@@ -58,10 +58,14 @@ code {
   z-index: 100;
 }
 
-.command-line__input:focus + #command-line__popup,
-#command-line__popup:focus,
-#command-line__popup:hover {
+.command-line__input:focus + #command-line__popup.show,
+#command-line__popup.show:focus,
+#command-line__popup.show:hover {
   visibility: visible;
+}
+
+.command-line__popup.hidden {
+  visibility: hidden;
 }
 
 .popup__list {
