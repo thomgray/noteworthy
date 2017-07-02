@@ -53,7 +53,7 @@ code {
   position: absolute;
   top: 40px;
   width: 100%;
-  background-color: blue;
+  background-color: grey;
   visibility: hidden;
   z-index: 100;
 }
@@ -66,11 +66,16 @@ code {
 
 .popup__list {
   list-style: none;
-  padding-left: 1em;
+  padding-left: 0;
 }
 
 .popup__list-item {
   cursor: default;
+  padding-left: .5em;
+}
+
+.popup__list-item:before {
+  content: "> ";
 }
 
 .popup__list-item:focus,
