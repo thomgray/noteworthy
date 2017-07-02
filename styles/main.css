@@ -78,7 +78,7 @@ code {
   content: "> ";
 }
 
-.popup__list-item:focus,
+.popup__list-item.selected,
 .popup__list-item:hover {
   color: white;
 }

@@ -32,13 +32,36 @@ var treeList = tree.getFileList(notePaths, clickTreeNote);
 treeView.appendChild(treeList);
 
 commandLine.addEventListener('keydown', function (e) {
-  if (e.which == 9) {
+  if (e.which == 9) { //tab
     e.preventDefault();
-    console.log("autocomplete");
-  } else if (e.which == 13) {
-    console.log("return");
-  } else if (e.which == 40) {
-    console.log("move to list");
+  } else if (e.which == 13) { // enter
+    nodes = commandLinePopUp.firstChild.childNodes
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i].classList.contains('selected')) {
+        nodes[i].click();
+        break;
+      }
+    }
+  } else if (e.which == 40) { // down
+    node = commandLinePopUp.firstChild.firstChild
+    while (node.nextSibling) {
+      if (node.classList.contains('selected')) {
+        node.classList.remove('selected')
+        node.nextSibling.classList.add('selected')
+        break;
+      }
+      node = node.nextSibling
+    }
+  } else if (e.which == 38) { //up
+    node = commandLinePopUp.firstChild.lastChild
+    while (node.previousSibling) {
+      if (node.classList.contains('selected')) {
+        node.classList.remove('selected')
+        node.previousSibling.classList.add('selected')
+        break;
+      }
+      node = node.previousSibling
+    }
   }
 });
 
@@ -48,7 +71,11 @@ function getSearchResultsAsUl(results) {
   results.forEach(function(el){
     li = document.createElement('li');
     li.classList.add('popup__list-item')
-    li.addEventListener('click', function(e){console.log("FOO");selectNote(el.note.path)});
+    li.addEventListener('click', function(e){
+      selectNote(el.note.path)
+      util.removeAllChildren(commandLinePopUp)
+      markedWrapper.firstChild.scrollIntoView();
+    });
     li.innerHTML = el.note.path.file
     ul.appendChild(li)
   });
@@ -68,7 +95,9 @@ commandLine.oninput = function(){
   if (results && results.length) {
     commandLinePopUp.classList.add('shown');
     util.removeAllChildren(commandLinePopUp);
-    commandLinePopUp.appendChild(getSearchResultsAsUl(results));
+    ul = getSearchResultsAsUl(results);
+    ul.firstChild.classList.add('selected')
+    commandLinePopUp.appendChild(ul);
   } else {
     commandLinePopUp.classList.remove('shown')
   }
