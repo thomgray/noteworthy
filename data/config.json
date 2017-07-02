@@ -7,5 +7,9 @@
     "~/Documents/note-worthy/training",
     "~/Documents/note-worthy/world-service"
   ],
-  "currentNote": "/Users/grayt13/Documents/note-worthy/training/meaningful-code-reviews.md"
+  "currentNote": {
+    "file": "php",
+    "dir": "/Users/grayt13/Documents/note-worthy",
+    "extension": "md"
+  }
 }

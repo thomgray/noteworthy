@@ -36,7 +36,6 @@ module.exports = {
 }
 
 function mapCheckBoxes(nodes) {
-  console.log(nodes);
   listItems = nodes.querySelectorAll('li')
   listItems.forEach(function(li){
     match = li.innerHTML.match(/^\[( |x)\] (.*)$/)
@@ -55,8 +54,6 @@ function mapCheckBoxes(nodes) {
       checkBoxDiv.appendChild(label)
       li.innerHTML = ""
       li.appendChild(checkBoxDiv)
-    } else {
-      console.log(li.innerHTML);
     }
 
   })

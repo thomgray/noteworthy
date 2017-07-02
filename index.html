@@ -18,8 +18,13 @@
       </div>
       <div class="right-pane" id="right-pane">
         <div class="main-wrapper">
-          <input type="text" name="search" value="" id="command-line" class="command-line">
-          <div class="index-button">
+          <div class="command-line">
+            <input type="text" name="search" value="" id="command-line" class="command-line__input">
+            <div id="command-line__popup">
+              <ul class="command-line__list"/>
+            </div>
+            <div class="index-button">
+          </div>
             <svg width="20" height="20" viewBox="0 0 40 40">
               <line x1="0" x2="40" y1="35" y2="35" style="stroke:grey;stroke-width:2"/>
               <line x1="0" x2="40" y1="25" y2="25" style="stroke:rgb(255,0,0);stroke-width:2"/>

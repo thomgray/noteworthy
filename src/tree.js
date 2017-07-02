@@ -44,7 +44,7 @@ function makeListItem(note, onclick) {
   var li = document.createElement('li')
   var div = document.createElement('div')
   div.classList.add('tree-list__element')
-  div.setAttribute('note-path', `${note.dir}/${note.file}`);
+  div.setAttribute('note-path', `${note.dir}/${note.file}.${note.extension}`);
   div.innerHTML = note.file
   div.onclick = onclick
   li.appendChild(div)

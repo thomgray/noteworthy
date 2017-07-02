@@ -23,7 +23,13 @@ module.exports = {
     notePaths = Array.prototype.concat.apply([], noteDirs.map(function(dir) {
         return (fs.readdirSync(dir).filter((path) => {
           return path.endsWith('.md') || path.endsWith('.txt');
-        })).map(function(file) { return  {file: file, dir: dir} });
+        })).map(function(file) { 
+          regex = /^(.*)\.(md|txt)$/
+          match = regex.exec(file)
+          file = match[1]
+          extn = match[2]
+          return  {file: file, dir: dir, extension: extn} 
+        });
     }));
 
     return notePaths;
@@ -31,8 +37,8 @@ module.exports = {
   loadNote(path) {
     if (typeof path == 'string') {
       return fs.readFileSync(path, 'utf8');
-    } else if ('dir' in path && 'path' in path) {
-      return fs.readFileSync(`${path.dir}/${path.file}`, 'utf8');
+    } else if ('dir' in path && 'file' in path) {
+      return fs.readFileSync(`${path.dir}/${path.file}.${path.extension}`, 'utf8');
     }
   }
 }

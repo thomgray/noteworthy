@@ -34,7 +34,7 @@ code {
   font-size: 80%;
 }
 
-.command-line {
+.command-line__input {
   font-size: 1em;
   font-family: inherit;
   background-color: #3CBC8D;
@@ -47,6 +47,35 @@ code {
   margin: 8px 0;
   box-sizing: border-box;
   /*background-color: #f5f5f5;*/
+}
+
+#command-line__popup {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  background-color: blue;
+  visibility: hidden;
+  z-index: 100;
+}
+
+.command-line__input:focus + #command-line__popup,
+#command-line__popup:focus,
+#command-line__popup:hover {
+  visibility: visible;
+}
+
+.popup__list {
+  list-style: none;
+  padding-left: 1em;
+}
+
+.popup__list-item {
+  cursor: default;
+}
+
+.popup__list-item:focus,
+.popup__list-item:hover {
+  color: white;
 }
 
 /*::-webkit-scrollbar
