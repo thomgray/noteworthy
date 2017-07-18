@@ -1,4 +1,22 @@
+.option-buttons-list {
+  display: inline-grid;
+}
+
 .index-button {
   border: 1px solid black;
+  display: inline-flex;
+}
+
+.open-in-atom-button {
   display: inline-block;
+}
+
+.open-in-atom-button svg {
+  border-radius: 20px;
+  fill: #23946b;
+}
+
+.open-in-atom-button:hover svg {
+  background-color: #23946b;
+  fill: white;
 }

@@ -9,11 +9,15 @@ const DAO = require('./DAO');
 const tree = require('./tree');
 const util = require('./util');
 const searchEngine = require('./searchEngine');
-var Split = require('split.js')
+const controls = require('./controls');
+var Split = require('split.js');
 
 // anchor objects
 const markedWrapper = document.getElementById("marked")
 const treeView = document.getElementById('tree-view');
+
+const openInAtomButton = document.getElementById('open-in-atom-button');
+const indexButton = document.getElementById('index-button');
 
 var treeViewList = document.createElement('ul');
 var p =  document.createElement('div');
@@ -112,6 +116,13 @@ Split([leftPane, rightPane], {
   minSize: [100, 300],
   gutterSize: 5,
 })
+
+openInAtomButton.onclick = function() {
+  controls.openInAtom(currentNote);
+};
+indexButton.onclick = function() {
+    console.log(currentNote);
+}
 
 function clickTreeNote(ev) {
     path = ev.target.getAttribute('note-path')
