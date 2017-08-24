@@ -1,28 +1,20 @@
 {
   "name": "electron-quick-start",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . CodeBook --platform=darwin --arch=x64 --version=1.0.0"
+    "build": "electron-packager . --overwrite --platform=darwin --arch=x64 --version=1.0.1 --prune=true --out=release-builds"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "~1.6.2"
+    "electron": "~1.6.2",
+    "electron-packager": "^8.7.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "electron-packager": "^8.7.0",
     "fs-plus": "^3.0.1",
     "jquery": "^3.2.1",
     "marked": "^0.3.6",

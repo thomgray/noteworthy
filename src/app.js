@@ -126,6 +126,8 @@ indexButton.onclick = function() {
 
 function clickTreeNote(ev) {
     path = ev.target.getAttribute('note-path')
+    path = DAO.getStructuredPath(path)
+    console.log(path);
     selectNote(path)
 }
 

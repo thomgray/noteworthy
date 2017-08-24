@@ -2,6 +2,14 @@ const fs = require('fs-plus');
 const md = require('./markdown');
 
 module.exports = {
+  getStructuredPath(rawPath) {
+    regex = /^(.+)\/(.+)\.(md|txt)$/
+    match = regex.exec(rawPath)
+    dir = match[1]
+    file = match[2]
+    extn = match[3]
+    return  {file: file, dir: dir, extension: extn} 
+  },
   getMap() {
     var str = fs.readFileSync(__dirname + '/../data/notemap.json', null, 'utf8');
     return JSON.parse(str);
