@@ -5,6 +5,7 @@
 // dependencies
 const md = require('./markdown');
 var fs = require('fs');
+const $ = require('jquery');
 const DAO = require('./DAO');
 const tree = require('./tree');
 const util = require('./util');
@@ -80,7 +81,11 @@ function getSearchResultsAsUl(results) {
       util.removeAllChildren(commandLinePopUp)
       markedWrapper.firstChild.scrollIntoView();
     });
-    li.innerHTML = el.note.path.file
+    var inner = el.note.path.file
+    if (el.note.path.subHeading) {
+      inner += ":" + el.note.path.subHeading;
+    }
+    li.innerHTML = inner;
     ul.appendChild(li)
   });
   return ul
@@ -91,11 +96,13 @@ commandLine.onblur = function(){ commandLinePopUp.classList.remove('shown')}
 commandLine.oninput = function(){
   text = commandLine.value;
   results = searchEngine.findWithString(text, notePaths.map(function(note){
+    var content = DAO.loadNote(note);
     return {
       path: note,
-      content: DAO.loadNote(note)
+      content: content,
+      structuredContent: md.markdown(content)
     }
-  }))
+  }));
   if (results && results.length) {
     commandLinePopUp.classList.add('show');
     util.removeAllChildren(commandLinePopUp);
@@ -120,6 +127,7 @@ Split([leftPane, rightPane], {
 openInAtomButton.onclick = function() {
   controls.openInAtom(currentNote);
 };
+
 indexButton.onclick = function() {
     console.log(currentNote);
 }
@@ -127,7 +135,6 @@ indexButton.onclick = function() {
 function clickTreeNote(ev) {
     path = ev.target.getAttribute('note-path')
     path = DAO.getStructuredPath(path)
-    console.log(path);
     selectNote(path)
 }
 
@@ -138,6 +145,15 @@ function selectNote(notePath) {
   markedWrapper.appendChild(p)
   DAO.setConfig("currentNote", notePath);
   currentNote = notePath
+  if (notePath.subHeading) {
+    subHeading = document.getElementById(notePath.subHeading);
+    if (!subHeading) {
+      return;
+    }
+    $(document).ready(function(){
+      subHeading.scrollIntoView();
+    });
+  }
 }
 
 module.exports = {

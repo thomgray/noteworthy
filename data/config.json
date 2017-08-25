@@ -8,8 +8,9 @@
     "~/Documents/note-worthy/world-service"
   ],
   "currentNote": {
-    "file": "git-cheat-list",
+    "file": "docker",
     "dir": "/Users/grayt13/Documents/note-worthy",
-    "extension": "md"
+    "extension": "md",
+    "subHeading": "mozart"
   }
 }
