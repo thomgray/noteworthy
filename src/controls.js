@@ -1,4 +1,5 @@
 var exec = require('child_process').exec;
+const $ = require('jquery');
 
 module.exports = {
   openInAtom(note) {

@@ -2,18 +2,20 @@ const DAO = require('./DAO');
 
 module.exports = {
   findWithString(string, notes) {
-    var noteMap = Array.prototype.concat.apply([], notes.map(function(note){
-      return getMatches(note, string);
-    }));
-    noteMap = noteMap.sort(function(note1, note2) {
-      return (note1.matchValue < note2.matchValue)? 1 : (note1.matchValue > note2.matchValue)? -1 : 0;
-    });
-    return noteMap.slice(0, 10);
+    return new Promise((resolve, reject) => {
+      var noteMap = Array.prototype.concat.apply([], notes.map(function(note){
+        return getMatches(note, string);
+      }));
+      noteMap = noteMap.sort(function(note1, note2) {
+        return (note1.matchValue < note2.matchValue)? 1 : (note1.matchValue > note2.matchValue)? -1 : 0;
+      });
+      resolve(noteMap.slice(0, 10));
+    })
   }
 }
 
 function getMatchValue(section, string) {
-  match =  section[0].textContent.match(new RegExp(string, 'g'));
+  match =  section[0].textContent.toLowerCase().match(new RegExp(string, 'g'));
   return match ? match.length: 0;
 }
 
@@ -47,7 +49,7 @@ function getMatches(note, query) {
     return {
       note: note,
       matchValue: getMatchValue(section, query),
-      subHeading: section[0].textContent
+      subHeading: section[0]
     };
   }).filter(function(match){
     return match.matchValue > 0;

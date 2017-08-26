@@ -3,6 +3,7 @@
 // All of the Node.js APIs are available in this process.
 
 // dependencies
+require('./bindings');
 const md = require('./markdown');
 var fs = require('fs');
 const $ = require('jquery');
@@ -83,7 +84,7 @@ function getSearchResultsAsUl(results) {
     });
     var inner = el.note.path.file
     if (el.subHeading) {
-      inner += ":" + el.subHeading;
+      inner += ":" + el.subHeading.textContent;
     }
     li.innerHTML = inner;
     ul.appendChild(li)
@@ -95,24 +96,25 @@ commandLine.onblur = function(){ commandLinePopUp.classList.remove('shown')}
 
 commandLine.oninput = function(){
   text = commandLine.value;
-  results = searchEngine.findWithString(text, notePaths.map(function(note){
+  searchEngine.findWithString(text.toLowerCase(), notePaths.map(function(note){
     var content = DAO.loadNote(note);
     return {
       path: note,
       content: content,
       structuredContent: md.markdown(content)
     }
-  }));
-  if (results && results.length) {
-    commandLinePopUp.classList.add('show');
-    util.removeAllChildren(commandLinePopUp);
-    ul = getSearchResultsAsUl(results);
-    ul.firstChild.classList.add('selected')
-    commandLinePopUp.appendChild(ul);
-  } else {
-    commandLinePopUp.classList.remove('show')
-    util.removeAllChildren(commandLinePopUp)
-  }
+  })).then((results) => {
+    if (results && results.length) {
+      commandLinePopUp.classList.add('show');
+      util.removeAllChildren(commandLinePopUp);
+      ul = getSearchResultsAsUl(results);
+      ul.firstChild.classList.add('selected')
+      commandLinePopUp.appendChild(ul);
+    } else {
+      commandLinePopUp.classList.remove('show')
+      util.removeAllChildren(commandLinePopUp)
+    }
+  });
 }
 
 var leftPane = document.getElementById('left-pane');
@@ -140,19 +142,18 @@ function clickTreeNote(ev) {
 
 function selectNote(note, subHeading) {
   var notePath = note.path || note;
-  console.log(notePath);
-  raw = DAO.loadNote(notePath)
-  console.log(raw);
-  p = md.markdown(raw)
+  var p = null;
+  if (note.structuredContent) {
+    p = note.structuredContent;
+  } else {
+    raw = DAO.loadNote(notePath)
+    p = md.markdown(raw)
+  }
   markedWrapper.removeChild(markedWrapper.firstChild)
   markedWrapper.appendChild(p)
   DAO.setConfig("currentNote", notePath);
   currentNote = notePath
   if (subHeading) {
-    subHeading = document.getElementById(subHeading);
-    if (!subHeading) {
-      return;
-    }
     $(document).ready(function(){
       subHeading.scrollIntoView();
     });
