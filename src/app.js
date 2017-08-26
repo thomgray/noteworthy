@@ -96,6 +96,10 @@ commandLine.onblur = function(){ commandLinePopUp.classList.remove('shown')}
 
 commandLine.oninput = function(){
   text = commandLine.value;
+  if (!text.length) {
+    commandLinePopUp.classList.remove('show');
+    return;
+  }
   searchEngine.findWithString(text.toLowerCase(), notePaths.map(function(note){
     var content = DAO.loadNote(note);
     return {
