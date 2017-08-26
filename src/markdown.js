@@ -9,6 +9,8 @@ module.exports = {
     node.classList.add('marked-container')
     node.innerHTML = marked(string)
     const links = node.querySelectorAll('a[href]')
+    
+    mapIds(node)
 
     Array.prototype.forEach.call(links, function (link) {
       const url = link.getAttribute('href')
@@ -57,6 +59,33 @@ function mapCheckBoxes(nodes) {
     }
 
   })
+}
+
+function mapIds(nodes) {
+  parentIds = [];
+  
+  nodes.childNodes.forEach(function(node) {
+    if (node.tagName) {
+      match = node.tagName.match(/H(\d)/);
+      if (match) {
+        original = node.id
+        hval = parseInt(match[1]);
+        position = parentIds.findIndex(function(element){
+          return element.hval >= hval;
+        });
+        if (position >= 0) {
+          parentIds = parentIds.slice(0, position);
+        }
+        parentIds.push({
+          id: original,
+          hval: hval
+        });
+        node.id = parentIds.reduce(function(sum, value) {
+          return sum ?  `${sum}:${value.id}` : value.id;
+        }, null);
+      }
+    }
+  });
 }
 
 function copyCode(ev) {

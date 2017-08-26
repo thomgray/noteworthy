@@ -120,10 +120,11 @@ commandLine.oninput = function(){
 var leftPane = document.getElementById('left-pane');
 var rightPane = document.getElementById('right-pane');
 
-Split([leftPane, rightPane], {
+const split = Split([leftPane, rightPane], {
   sizes: [20, 80],
-  minSize: [100, 300],
+  minSize: [0, 300],
   gutterSize: 5,
+  snapOffset: 50
 })
 
 openInAtomButton.onclick = function() {
