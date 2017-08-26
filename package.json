@@ -1,11 +1,11 @@
 {
-  "name": "electron-quick-start",
+  "name": "CodeBook",
   "version": "1.0.1",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . --overwrite --platform=darwin --arch=x64 --version=1.0.1 --prune=true --out=release-builds"
+    "build": "electron-packager . CodeBook --platform=darwin --arch=x64 --icon=build/book.icns"
   },
   "author": "GitHub",
   "license": "CC0-1.0",
