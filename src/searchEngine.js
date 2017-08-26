@@ -2,7 +2,9 @@ const DAO = require('./DAO');
 
 module.exports = {
   findWithString(string, notes) {
-    var noteMap = Array.prototype.concat.apply([], notes.map(getMatches));
+    var noteMap = Array.prototype.concat.apply([], notes.map(function(note){
+      return getMatches(note, string);
+    }));
     noteMap = noteMap.sort(function(note1, note2) {
       return (note1.matchValue < note2.matchValue)? 1 : (note1.matchValue > note2.matchValue)? -1 : 0;
     });
@@ -10,15 +12,14 @@ module.exports = {
   }
 }
 
-function getMatchValue(noteContent, string) {
-  match =  noteContent.match(new RegExp(string, 'g'));
-  return match? match.length: 0;
-  
+function getMatchValue(section, string) {
+  match =  section[0].textContent.match(new RegExp(string, 'g'));
+  return match ? match.length: 0;
 }
 
-function getMatches(note) {
-  var matches = [];
+function getNoteSections(note) {
   var array = Array.from(note.structuredContent.childNodes);
+  var sections = [];
   var i = 0;
   while (i < array.length) {
     node = array[i];
@@ -30,20 +31,27 @@ function getMatches(note) {
         }
         j++;
       }
-      
+      section = array.slice(i, j);
+      sections.push(section);
       i=j;
+    } else {
+      i++;
     }
   }
-  console.log(array);
-  note.structuredContent.childNodes.forEach(function(node) {
-    if (node.tagName && node.tagName.match(/H\d/)) {
-      lastHeader = node;
-      // console.log(node.tagName);
-    }
-  });
-  return [];
-  // return {
-  //   matchValue: getMatchValue(note.content, string),
-  //   note: note
-  // }
+  return sections;
 }
+
+function getMatches(note, query) {
+  var sections = getNoteSections(note);
+  var matches = sections.map(function(section){
+    return {
+      note: note,
+      matchValue: getMatchValue(section, query),
+      subHeading: section[0].textContent
+    };
+  }).filter(function(match){
+    return match.matchValue > 0;
+  });
+  return matches;
+}
+

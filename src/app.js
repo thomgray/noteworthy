@@ -77,13 +77,13 @@ function getSearchResultsAsUl(results) {
     li = document.createElement('li');
     li.classList.add('popup__list-item')
     li.addEventListener('click', function(e){
-      selectNote(el.note.path)
+      selectNote(el.note, el.subHeading);
       util.removeAllChildren(commandLinePopUp)
       markedWrapper.firstChild.scrollIntoView();
     });
     var inner = el.note.path.file
-    if (el.note.path.subHeading) {
-      inner += ":" + el.note.path.subHeading;
+    if (el.subHeading) {
+      inner += ":" + el.subHeading;
     }
     li.innerHTML = inner;
     ul.appendChild(li)
@@ -138,15 +138,18 @@ function clickTreeNote(ev) {
     selectNote(path)
 }
 
-function selectNote(notePath) {
+function selectNote(note, subHeading) {
+  var notePath = note.path || note;
+  console.log(notePath);
   raw = DAO.loadNote(notePath)
+  console.log(raw);
   p = md.markdown(raw)
   markedWrapper.removeChild(markedWrapper.firstChild)
   markedWrapper.appendChild(p)
   DAO.setConfig("currentNote", notePath);
   currentNote = notePath
-  if (notePath.subHeading) {
-    subHeading = document.getElementById(notePath.subHeading);
+  if (subHeading) {
+    subHeading = document.getElementById(subHeading);
     if (!subHeading) {
       return;
     }
